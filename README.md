@@ -1,1 +1,1 @@
-### This is an Network Security Project for Phising dta
+### This is an Network Security Project for Phising data
