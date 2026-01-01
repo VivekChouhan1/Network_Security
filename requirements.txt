@@ -1,0 +1,4 @@
+python-dotenv ## sepcifically use to call env variables
+pandas
+numpy
+matplotlib

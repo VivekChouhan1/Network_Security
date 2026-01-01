@@ -1,0 +1,1 @@
+## contain generic info about user, and used while creating packages
