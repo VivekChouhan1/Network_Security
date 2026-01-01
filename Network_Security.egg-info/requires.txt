@@ -3,5 +3,3 @@ numpy
 matplotlib
 pymongo
 certifi
-
-# -e .
