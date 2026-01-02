@@ -2,7 +2,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = "mongodb+srv://vivekchouhan590_db_user:<password>@cluster0networksecurity.22dnv2e.mongodb.net/?appName=Cluster0NetworkSecurity"
+uri = "mongodb+srv://<user_name>:<password>@cluster0networksecurity.22dnv2e.mongodb.net/?appName=Cluster0NetworkSecurity"
 ## add password when needed
 
 
