@@ -3,12 +3,18 @@ import sys
 from networksecurity.components.data_ingestion import DataIngestion
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logging
-from networksecurity.entity.config_entity import DataIngestionConfig,DataValidationConfig
+from networksecurity.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 from networksecurity.entity.config_entity import TrainingPipelineConfig
 
 
-##for data validation
+
+# for data validation
 from networksecurity.components.data_validation import DataValidation
+
+# for data tranformation
+from networksecurity.components.data_transformation import DataTransformation
+
+
 
 if __name__=="__main__":
     try:
@@ -30,6 +36,15 @@ if __name__=="__main__":
         logging.info("Data Validation completed")
         print(data_validation_artifacts)
         ## when this executed, it creted articats and logs folder, right now we will delete it
+
+
+        ## for data Transformation 
+        data_transformation_config=DataTransformationConfig(trainingpipelineconfig)
+        datatranformation=DataTransformation(data_validation_artifacts,data_transformation_config)
+        logging.info("initiate Data Transformation")
+        data_transformation_artifacts=datatranformation.initiate_data_transformation()
+        logging.info("Data tranformation completed")
+        print(data_transformation_artifacts)
 
     except Exception as e:
         raise NetworkSecurityException(e,sys)
