@@ -108,7 +108,7 @@ class DataValidation:
 
             ## read the data from train and test
             train_dataframe=DataValidation.read_data(train_file_path)
-            test_dataframe=DataValidation.read_data(test_file_path)
+            test_dataframe=DataValidation.read_data(test_file_path) 
 
             ## now we have to validate the data with our schema
             status=self.validate_no_of_columns(dataframe=train_dataframe)
