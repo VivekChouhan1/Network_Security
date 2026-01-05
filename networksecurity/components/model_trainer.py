@@ -29,11 +29,18 @@ from sklearn.ensemble import (
 )
 import mlflow
 
+
+##here basically this mlflow store logs in local folder, to store this in remote repo:
+import dagshub
+dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mlflow=True)
+
+
+
 class ModelTrainer:
-    def __init__(self,model_trainer_config:ModelTrainerConfig,data_tranformation_artifact:DataTransformationArtifacts):
+    def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifacts):
         try:
             self.model_trainer_config=model_trainer_config
-            self.data_transformation_artifacts=data_tranformation_artifact
+            self.data_transformation_artifacts=data_transformation_artifact
         except Exception as e:
             raise NetworkSecurityException(e,sys)
 
@@ -135,6 +142,9 @@ class ModelTrainer:
             Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
             save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
 
+
+            # now we have to save this model, in final_model to do prediction
+            save_object("final_model/model.pkl",best_model)
 
             ## model Trainer Artifacts
             model_trainer_artfacts=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,

@@ -31,10 +31,10 @@ from networksecurity.utils.main_utils.utils import save_numpy_array_data,save_ob
 
 class DataTransformation:
     def __init__(self,data_validation_artifact:DataValidationArtifact,   ##entire pipeline is given of previous stage
-                 data_transfromation_config:DataTransformationConfig):
+                 data_transformation_config:DataTransformationConfig):
         try:
             self.data_validation_artifacts=data_validation_artifact
-            self.data_transformation_config=data_transfromation_config
+            self.data_transformation_config=data_transformation_config
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
@@ -116,6 +116,11 @@ class DataTransformation:
             save_numpy_array_data( self.data_transformation_config.transformed_train_file_path, array=train_arr, )
             save_numpy_array_data( self.data_transformation_config.transformed_test_file_path, array=test_arr, )
             save_object(self.data_transformation_config.transformed_object_file_path, preprocessor_object,)
+
+
+
+            ##we have to save this preprocessor object as final_model for prediction
+            save_object("final_model/preprocessor.pkl",preprocessor_object,)
 
 
             ## Preparing artifacts
