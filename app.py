@@ -103,4 +103,4 @@ async def predict_route(request: Request,file: UploadFile = File(...)):    ## we
 
 ## to run  : "uvicorn app:app --reload"      :::: 1 st app=file name and 2 nd app is app name in this file
 if __name__=="__main__":
-    app_run(app,host="0.0.0.0",port=8080)
+    app_run(app,host="0.0.0.0",port=8000)
