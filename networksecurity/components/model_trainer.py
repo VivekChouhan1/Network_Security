@@ -32,8 +32,20 @@ import mlflow
 
 ##here basically this mlflow store logs in local folder, to store this in remote repo:
 import dagshub
-dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mlflow=True)
+# dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mlflow=True)
 
+## write when deploy
+try:
+    if os.getenv("DISABLE_DAGSHUB", "false").lower() != "true":
+        try:
+            import dagshub
+            dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mflow=True)
+        except Exception as e:
+            logging.warning(f"Dagshub init failed, continuing without dagshub: {e}")
+    else:
+        logging.info("Dagshub integration disabled via DISABLE_DAGSHUB env var")
+except Exception as e:
+    logging.warning(f"Dagshub import/initialization not available: {e}")
 
 
 class ModelTrainer:
