@@ -15,6 +15,7 @@ class TrainingPipelineConfig:  ##when we talk about TrainigPipelineCOnfig, we ne
         self.pipeline_name=training_pipeline.PIPELINE_NAME   ## this all are coming from constent -> training_pipeline -> __init__.py
         self.artifact_name=training_pipeline.ARTIFACT_DIR      
         self.artifact_dir=os.path.join(self.artifact_name, timestamp)
+        self.model_dir = os.path.join(self.artifact_name,timestamp)
         self.timestamp:str = timestamp
         pass
 
