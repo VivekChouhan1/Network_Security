@@ -31,8 +31,8 @@ import mlflow
 
 
 # ##here basically this mlflow store logs in local folder, to store this in remote repo:
-# import dagshub
-# dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mlflow=True)
+import dagshub
+dagshub.init(repo_owner='vivekchouhan2512', repo_name='Network_Security', mlflow=True)
 
 # ## write when deploy
 # try:
@@ -57,17 +57,17 @@ class ModelTrainer:
             raise NetworkSecurityException(e,sys)
 
 
-    # def track_mlflow(self,best_model,classificationmetric):
-    #     with mlflow.start_run():
-    #         f1_score=classificationmetric.f1_score
-    #         precision_score=classificationmetric.precision_score
-    #         recall_score=classificationmetric.recall_score
+    def track_mlflow(self,best_model,classificationmetric):
+        with mlflow.start_run():
+            f1_score=classificationmetric.f1_score
+            precision_score=classificationmetric.precision_score
+            recall_score=classificationmetric.recall_score
 
-    #         ##log in local system
-    #         mlflow.log_metric("f1_score",f1_score)
-    #         mlflow.log_metric("Precision_score",precision_score)
-    #         mlflow.log_metric("recall_score",recall_score)
-    #         mlflow.sklearn.log_model(best_model,'model')
+            ##log in local system
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("Precision_score",precision_score)
+            mlflow.log_metric("recall_score",recall_score)
+            mlflow.sklearn.log_model(best_model,'model')
 
 
 
@@ -130,9 +130,9 @@ class ModelTrainer:
             
             ## to Track the MLflow
             # mlflow: this is open source tool to manage entire lifecycle of datascience project, we can store various metric and then we can visulise them 
-            ## after we get the best model, for that model whatever classifcation metric we get, we have to track that entire 
-            #thung is mlflow
-            # self.track_mlflow(best_model,classification_train_metric)   #fn defined in class itself
+            # after we get the best model, for that model whatever classifcation metric we get, we have to track that entire 
+            # thung is mlflow
+            self.track_mlflow(best_model,classification_train_metric)   #fn defined in class itself
             
 
 
@@ -141,7 +141,7 @@ class ModelTrainer:
             classification_test_metric=get_classfication_report(y_test,y_test_pred)
 
             ##to track mlflow of test also
-            # self.track_mlflow(best_model,classification_test_metric)   #fn defined in class itself
+            self.track_mlflow(best_model,classification_test_metric)   #fn defined in class itself
 
             ##for any new data we have to first transfrom it and then predict it
             preprocessor=load_object(file_path=self.data_transformation_artifacts.transformed_object_file_path)
